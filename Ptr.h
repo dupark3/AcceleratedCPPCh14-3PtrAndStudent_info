@@ -55,7 +55,8 @@ Ptr<T>& Ptr<T>::operator=(const Ptr<T>& rhs){
     return *this;
 }
 
-
+//TODO
+// implement the clone() layer of indirection using template specialization
 
 #endif // GUARD_Ptr_h
 
