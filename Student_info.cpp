@@ -96,9 +96,8 @@ std::istream& Student_info::read(std::istream& in){
 
 double grade(double midterm, double final, const std::vector<double>& homework){
     if (homework.size() == 0)
-        throw std::domain_error("student has done no homework");
-
-    // Use nonmember median function (defined in Student_info.h) to calculate grade
+        throw std::domain_error("This student has done no homework");
+   
     return (midterm * 0.2) + (final * 0.4) + (median(homework) * 0.4);
 }
 
@@ -106,4 +105,22 @@ bool compare(const std::string& s1, const std::string& s2){
     return s1 < s2;
 }
 
+std::istream& read_hw(std::istream& is, std::vector<double> vec){
+    if (is){
+        vec.clear();
+        double x;
+        while (is.peek() != '\n'){
+            is >> x;
+            vec.push_back(x);
+        }
+        is.clear();
+    }
+    return is;
+};
 
+double median(std::vector<double> vec){
+    std::sort(vec.begin(), vec.end());
+    size_t size = vec.size();
+    size_t mid = size / 2;
+    size % 2 == 0 ? return (vec[mid - 1] + vec[mid]) / 2 : return vec[mid];
+};

@@ -96,29 +96,8 @@ private:
 bool compare(const std::string&, const std::string&);
 bool compare_grades(const Core&, const Core&);
 double grade(double, double, const std::vector<double>&);
-
-template <class container>
-std::istream& read_hw(std::istream& is, container& c){
-    if (is){
-        c.clear();
-        double x;
-        while (is.peek() != '\n'){
-            is >> x;
-            c.push_back(x);
-        }
-
-        is.clear();
-    }
-    return is;
-};
-
-double median(std::vector<double> vec){
-    std::sort(vec.begin(), vec.end());
-    size_t size = vec.size();
-    size_t mid = size / 2;
-    size % 2 == 0 ? return (vec[mid - 1] + vec[mid]) / 2 : return vec[mid];
-};
-
+std::istream& read_hw(std::istream&, std::vector<double>);
+double median(std::vector<double>);
 
 #endif // GUARD_student_info_h
 
