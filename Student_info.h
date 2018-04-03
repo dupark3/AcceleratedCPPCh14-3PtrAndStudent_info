@@ -15,7 +15,7 @@ bool compare(const std::string&, const std::string&);
     *******************/
 
 class Core{
-friend class Ptr;
+template <class T> friend class Ptr;
 friend class Student_info;
 public:
     Core() : midterm(0), final(0) { }
@@ -93,10 +93,9 @@ private:
     /**********************************************
     * NON MEMBER FUNCTIONS AND TEMPLATE FUNCTIONS *
     ***********************************************/
-bool compare(const std::string&, const std::string&);
-bool compare_grades(const Core&, const Core&);
+bool compare_Core_handles(const Ptr<Core>&, const Ptr<Core>&);
 double grade(double, double, const std::vector<double>&);
-std::istream& read_hw(std::istream&, std::vector<double>);
+std::istream& read_hw(std::istream&, std::vector<double>&);
 double median(std::vector<double>);
 
 #endif // GUARD_student_info_h
