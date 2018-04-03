@@ -1,6 +1,7 @@
 #include <algorithm> // max
 #include <iomanip> //streamsize
 #include <iostream>
+#include <stdexcept> // domain_error
 #include <string>
 #include <vector>
 
@@ -30,11 +31,11 @@ int main() {
     for (std::vector< Ptr<Core> >::size_type i = 0; i != students.size(); ++i){
         std::cout << students[i]->name() << std::string(maxlen + 1 - students[i]->name().size(), ' ');
         try{
-            double final_grade = students[i]->grade();
             std::streamsize prec = std::cout.precision();
-            std::cout << final_grade << students[i]->letterGrade() << std::endl;
-        } catch (domain_error e){
-            std::cout << e.what << std::endl;
+            std::cout << students[i]->grade() << ' '
+                      << students[i]->letterGrade() << std::endl;
+        } catch (const std::domain_error& e){
+            std::cout << e.what() << std::endl;
         }
     }
 
