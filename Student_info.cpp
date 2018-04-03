@@ -68,7 +68,7 @@ Student_info::Student_info(const Student_info& s) : cp(0){
 
 Student_info& Student_info::operator=(const Student_info& s){
     if (&s != this){
-        delete cp;
+        cp.~Ptr();
         if (s.cp)
             cp = s.cp->clone();
         else
@@ -97,7 +97,7 @@ std::istream& Student_info::read(std::istream& in){
 double grade(double midterm, double final, const std::vector<double>& homework){
     if (homework.size() == 0)
         throw std::domain_error("This student has done no homework");
-   
+
     return (midterm * 0.2) + (final * 0.4) + (median(homework) * 0.4);
 }
 
@@ -105,7 +105,7 @@ bool compare_Core_handles(const Ptr<Core>& p1, const Ptr<Core>& p2){
     return p1->name() < p2->name();
 }
 
-std::istream& read_hw(std::istream& is, std::vector<double> vec){
+std::istream& read_hw(std::istream& is, std::vector<double>& vec){
     if (is){
         vec.clear();
         double x;
@@ -122,5 +122,6 @@ double median(std::vector<double> vec){
     std::sort(vec.begin(), vec.end());
     size_t size = vec.size();
     size_t mid = size / 2;
-    size % 2 == 0 ? return (vec[mid - 1] + vec[mid]) / 2 : return vec[mid];
+    if (size % 2 == 0) return ((vec[mid - 1] + vec[mid]) / 2);
+    else return vec[mid];
 };
