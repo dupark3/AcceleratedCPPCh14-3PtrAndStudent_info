@@ -101,8 +101,8 @@ double grade(double midterm, double final, const std::vector<double>& homework){
     return (midterm * 0.2) + (final * 0.4) + (median(homework) * 0.4);
 }
 
-bool compare(const std::string& s1, const std::string& s2){
-    return s1 < s2;
+bool compare_Core_handles(const Ptr<Core>& p1, const Ptr<Core>& p2){
+    return p1->name() < p2->name();
 }
 
 std::istream& read_hw(std::istream& is, std::vector<double> vec){
