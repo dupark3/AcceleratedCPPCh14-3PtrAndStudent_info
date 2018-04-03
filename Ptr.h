@@ -18,11 +18,11 @@ public:
     }
 
     operator bool() const { return p; }
-    T& operator* const {
+    T& operator*() const {
         if(p) return *p;
         throw std::runtime_error("uninitialized Ptr");
     }
-    T* operator-> const {
+    T* operator->() const {
         if(p) return p;
         throw std::runtime_error("uninitialized Ptr");
     }
@@ -44,7 +44,7 @@ private:
     * MEMBER FUNCTIONS *
     ********************/
 template <class T>
-Ptr<T> Ptr<T>::operator=(const Ptr& rhs){
+Ptr<T>& Ptr<T>::operator=(const Ptr<T>& rhs){
     ++*rhs.refptr;
     if(--*refptr == 0){
         delete p;
